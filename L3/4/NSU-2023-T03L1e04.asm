@@ -7,52 +7,31 @@ asect  0x00
 # Do not include a halt instruction: that has been done already (below)
 # ---------------------------------------------------------------------
 
-
-# X = (Q * Y) + R
-
-# Q = 0
-# R = x
-# while (R >= y)
-# {
-# 	R = R - Y
-# 	Q = Q + 1
-# }
-
-	ldi r0, 0
+	ldi r0, content
 	
-	ldi r1, x
+	ldi r1, n
 	ld r1, r1
 	
-	ldi r2, y
-	ld r2, r2
-	
+	ldi r2, 1
 	
 	while
-		cmp r1, r2
-	stays pl
+		tst r1
+	stays nz
+		st r0, r2
 		inc r0
-		
-		sub r2, r1
-		neg r1
+		inc r2
+		dec r1
 	wend
-	
-	ldi r3, quot
-	st r3, r0
-	
-	ldi r3, remain
-	st r3, r1
 	
 	
 
-	
 
 # =================================
 # LEAVE THIS PART OF THE FILE ALONE
 # Do not change the next two instructions: they must be the last two
 # instructions executed by your program.
-    ldi r0, quot  # Loads the address of your result into r0 for the robot
-    ldi r1, remain
-    halt          # Brings execution to a halt
+    ldi r0, content  # Loads the address of your result into r0 for the robot
+    halt            # Brings execution to a halt
 
 # =================================
 # DATA GOES BELOW
@@ -62,11 +41,9 @@ asect  0x00
 # ---------------------------------------------------------------------
 
 INPUTS>
-x:      dc 99   # replace these with your choice
-y:      dc 6    # of unsigned numbers for testing
+n:       dc 12   # replace this with your choice of unsigned number for testing
 ENDINPUTS>
 
-quot:   ds 1    # one byte reserved for the quotient
-remain: ds 1    # one byte reserved for the remainder
+content: ds 15  # 15 bytes reserved for the content of the array
 end
 

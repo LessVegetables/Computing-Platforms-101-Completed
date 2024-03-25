@@ -7,66 +7,55 @@ asect  0x00
 # Do not include a halt instruction: that has been done already (below)
 # ---------------------------------------------------------------------
 
-
-# X = (Q * Y) + R
-
-# Q = 0
-# R = x
-# while (R >= y)
-# {
-# 	R = R - Y
-# 	Q = Q + 1
-# }
-
-	ldi r0, 0
+	ldi r0, content
 	
-	ldi r1, x
+	ldi r1, length
 	ld r1, r1
+	dec r1
 	
-	ldi r2, y
-	ld r2, r2
-	
+	add r1, r0
 	
 	while
-		cmp r1, r2
-	stays pl
-		inc r0
-		
-		sub r2, r1
-		neg r1
+		tst r1
+	stays ne
+		ld r0, r2
+		if
+			tst r2
+		is mi
+			neg r2
+			st r0, r2
+		fi
+		dec r1
+		dec r0
 	wend
 	
-	ldi r3, quot
-	st r3, r0
-	
-	ldi r3, remain
-	st r3, r1
-	
+	ld r0, r2
+	if
+		tst r2
+	is mi
+		neg r2
+		st r0, r2
+	fi
 	
 
-	
 
 # =================================
 # LEAVE THIS PART OF THE FILE ALONE
 # Do not change the next two instructions: they must be the last two
 # instructions executed by your program.
-    ldi r0, quot  # Loads the address of your result into r0 for the robot
-    ldi r1, remain
-    halt          # Brings execution to a halt
+    ldi r0, content  # Loads the start address of your result into r0 for the robot
+    halt             # Brings execution to a halt
 
 # =================================
 # DATA GOES BELOW
 # We have set this up for you, but you will need to test your program by
 # compiling and running it several times with different input data values
-# (different unsigned numbers placed at addresses x and y)
+# (different arrays of numbers)
 # ---------------------------------------------------------------------
 
-INPUTS>
-x:      dc 99   # replace these with your choice
-y:      dc 6    # of unsigned numbers for testing
-ENDINPUTS>
-
-quot:   ds 1    # one byte reserved for the quotient
-remain: ds 1    # one byte reserved for the remainder
+DATA>
+length:  dc 5          # the length of the array (between 1 and 10)
+content: dc -127, 0, -3, 4, -9, -1, 7, 88, -92, 18
+ENDDATA>
 end
 
