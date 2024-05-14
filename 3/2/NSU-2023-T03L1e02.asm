@@ -7,17 +7,6 @@ asect  0x00
 # Do not include a halt instruction: that has been done already (below)
 # ---------------------------------------------------------------------
 
-
-# X = (Q * Y) + R
-
-# Q = 0
-# R = x
-# while (R >= y)
-# {
-# 	R = R - Y
-# 	Q = Q + 1
-# }
-
 	ldi r0, 0
 	
 	ldi r1, x
@@ -62,11 +51,10 @@ asect  0x00
 # ---------------------------------------------------------------------
 
 INPUTS>
-x:      dc 99   # replace these with your choice
-y:      dc 6    # of unsigned numbers for testing
+x:      dc 10   # replace these with your choice
+y:      dc 25    # of unsigned numbers for testing
 ENDINPUTS>
 
-quot:   ds 1    # one byte reserved for the quotient
-remain: ds 1    # one byte reserved for the remainder
+out: ds 1    # one byte reserved for the remainder
 end
 
