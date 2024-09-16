@@ -9,7 +9,7 @@ Main coursework materials: [CCFIT Platform Resources](http://ccfit.nsu.ru/~fat/P
 **Lecturers**: [Dmitry V. Irtegov](https://github.com/dmitry-irtegov), A. Shafarenko
 
 ## Contents
-- **Folders 1–3**: Tasks in assembly for the CdM8 educational virtual chipset.
+- **Folders 0–3**: Tasks in assembly for the CdM8 educational virtual chipset.
 - **Folders 4–6**: Tasks created using Logisim.
 
 These exercises are prerequisites for the final group project, which can be found here: [Ping Pong Project](https://github.com/LessVegetables/ping-pong).
